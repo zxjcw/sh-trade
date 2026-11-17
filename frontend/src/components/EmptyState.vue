@@ -16,4 +16,8 @@ withDefaults(defineProps<{ description?: string }>(), { description: '这里还�
   display: flex;
   justify-content: center;
 }
+
+.empty-wrap :deep(.el-empty__description p) {
+  letter-spacing: 0.04em;
+}
 </style>

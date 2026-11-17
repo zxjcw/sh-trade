@@ -8,8 +8,8 @@ defineProps<{ item: Item }>()
 </script>
 
 <template>
-  <router-link class="item-card surface" :to="`/items/${item.id}`">
-    <div class="thumb">
+  <router-link class="item-card" :to="`/items/${item.id}`">
+    <div class="plate">
       <CoverImage
         :seed="item.coverSeed"
         :title="item.title"
@@ -17,6 +17,10 @@ defineProps<{ item: Item }>()
       />
     </div>
     <div class="body">
+      <div class="meta-top">
+        <span class="category">{{ item.categoryName }}</span>
+        <StatusTag v-if="item.status !== 'on_sale'" kind="item" :status="item.status" />
+      </div>
       <h3 class="title">{{ item.title }}</h3>
       <div class="price-row">
         <span class="price">{{ item.price.toFixed(2) }}</span>
@@ -24,9 +28,8 @@ defineProps<{ item: Item }>()
       </div>
       <div class="meta">
         <span>{{ item.sellerName }}</span>
-        <span class="dot">·</span>
+        <span class="dot">/</span>
         <span>信用 {{ item.sellerCredit }}</span>
-        <StatusTag v-if="item.status !== 'on_sale'" class="status" kind="item" :status="item.status" />
       </div>
     </div>
   </router-link>
@@ -36,76 +39,90 @@ defineProps<{ item: Item }>()
 .item-card {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+  gap: 12px;
 }
 
-.item-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(47, 107, 79, 0.35);
-  box-shadow: var(--sgj-shadow);
-}
-
-.thumb {
+.plate {
   aspect-ratio: 4 / 3;
   overflow: hidden;
+  border: 1px solid var(--sgj-line-strong);
+  background: var(--sgj-paper-deep);
+  transition: border-color 0.25s ease;
+}
+
+.item-card:hover .plate {
+  border-color: var(--sgj-ink-soft);
 }
 
 .body {
   display: flex;
   flex: 1;
   flex-direction: column;
+  gap: 7px;
+}
+
+.meta-top {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  padding: 14px 15px 16px;
+}
+
+.category {
+  color: var(--sgj-muted);
+  font-size: 10px;
+  letter-spacing: 0.14em;
 }
 
 .title {
   display: -webkit-box;
-  margin: 0;
   overflow: hidden;
   color: var(--sgj-ink);
+  font-family: var(--sgj-font-body);
   font-size: 15px;
-  font-weight: 600;
-  line-height: 1.45;
+  font-weight: 500;
+  line-height: 1.6;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
 
+.item-card:hover .title {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
 .price-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 8px;
+  gap: 4px 10px;
   margin-top: auto;
 }
 
 .price {
-  font-size: 20px;
+  font-size: 21px;
 }
 
 .original {
-  color: #a3aaa5;
-  font-size: 12px;
+  color: var(--sgj-faint);
+  font-size: 11px;
   text-decoration: line-through;
 }
 
 .meta {
   display: flex;
   align-items: center;
-  gap: 5px;
-  overflow: hidden;
-  color: var(--sgj-muted);
-  font-size: 12px;
-  white-space: nowrap;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--sgj-line);
+  color: var(--sgj-faint);
+  font-size: 11px;
+  letter-spacing: 0.02em;
 }
 
 .dot {
-  color: #c7ccc8;
-}
-
-.status {
-  margin-left: auto;
+  color: var(--sgj-line-strong);
 }
 </style>

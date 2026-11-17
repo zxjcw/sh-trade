@@ -396,7 +396,8 @@ onMounted(load)
   height: 66px;
   flex-shrink: 0;
   overflow: hidden;
-  border-radius: 9px;
+  border: 1px solid var(--sgj-line-strong);
+  border-radius: 1px;
 }
 
 .item-info {

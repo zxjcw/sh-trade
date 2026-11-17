@@ -177,11 +177,11 @@ onMounted(load)
   height: 72px;
   flex-shrink: 0;
   place-items: center;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #d9a860, #b57a25);
-  box-shadow: 0 10px 24px rgba(181, 122, 37, 0.24);
-  color: #fff;
-  font-size: 30px;
+  border-radius: 1px;
+  background: var(--sgj-brass);
+  color: var(--sgj-surface);
+  font-family: var(--sgj-font-display);
+  font-size: 32px;
   font-weight: 600;
 }
 
@@ -194,8 +194,10 @@ onMounted(load)
 
 .name-row h1 {
   margin: 0;
-  font-size: 24px;
-  letter-spacing: 1px;
+  font-family: var(--sgj-font-display);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .username {
@@ -228,7 +230,9 @@ onMounted(load)
 }
 
 .metric strong {
-  font-size: 22px;
+  font-family: var(--sgj-font-display);
+  font-size: 24px;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 

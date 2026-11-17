@@ -195,10 +195,11 @@ onMounted(load)
 .evidence-text {
   margin: 0;
   padding: 14px 16px;
-  border-radius: 10px;
-  background: #f8f6f0;
-  color: #4b564f;
-  font-size: 13px;
+  border: 1px solid var(--sgj-line);
+  border-radius: 1px;
+  background: var(--sgj-paper-deep);
+  color: var(--sgj-ink-soft);
+  font-size: 12px;
   line-height: 1.8;
 }
 

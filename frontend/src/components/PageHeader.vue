@@ -33,25 +33,28 @@ withDefaults(
 }
 
 .eyebrow {
-  margin: 0 0 6px;
-  color: var(--sgj-accent-deep);
-  font-size: 12px;
+  margin: 0 0 7px;
+  color: var(--sgj-brass);
+  font-size: 9px;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 0.2em;
 }
 
 h1 {
   margin: 0;
-  font-size: 28px;
-  letter-spacing: 1px;
-  line-height: 1.2;
+  font-family: var(--sgj-font-display);
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
 }
 
 .subtitle {
-  margin: 8px 0 0;
+  max-width: 62ch;
+  margin: 9px 0 0;
   color: var(--sgj-muted);
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.8;
 }
 
 .actions {

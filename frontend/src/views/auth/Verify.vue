@@ -172,10 +172,11 @@ async function submit() {
   gap: 4px;
   margin-top: 24px;
   padding: 14px 16px;
-  border: 1px dashed rgba(201, 138, 46, 0.4);
-  border-radius: 12px;
-  background: #fbf5e8;
-  font-size: 12px;
+  border: 1px dashed var(--sgj-line-strong);
+  border-radius: 1px;
+  background: var(--sgj-brass-soft);
+  font-size: 11px;
+  line-height: 1.8;
 }
 
 .demo-tip strong {
@@ -225,10 +226,11 @@ async function submit() {
   width: 64px;
   height: 64px;
   place-items: center;
-  border-radius: 50%;
-  background: var(--sgj-primary-soft);
-  color: var(--sgj-primary);
-  font-size: 34px;
+  border: 1px solid var(--sgj-line);
+  border-radius: 1px;
+  background: var(--sgj-green-soft);
+  color: var(--sgj-green);
+  font-size: 32px;
 }
 
 .verified h1 {

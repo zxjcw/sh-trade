@@ -223,7 +223,8 @@ onMounted(load)
   height: 50px;
   flex-shrink: 0;
   overflow: hidden;
-  border-radius: 8px;
+  border: 1px solid var(--sgj-line-strong);
+  border-radius: 1px;
 }
 
 .item-text {
@@ -249,7 +250,8 @@ onMounted(load)
 .drawer-cover {
   height: 200px;
   overflow: hidden;
-  border-radius: 12px;
+  border: 1px solid var(--sgj-line-strong);
+  border-radius: 1px;
 }
 
 .drawer-title {

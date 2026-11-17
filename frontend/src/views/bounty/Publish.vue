@@ -141,10 +141,11 @@ onMounted(async () => {
 
 .tips {
   padding: 14px 18px;
-  border-radius: 12px;
-  background: #fbf5e8;
-  color: #8a7b60;
-  font-size: 12px;
+  border: 1px solid var(--sgj-line);
+  border-radius: 1px;
+  background: var(--sgj-brass-soft);
+  color: #7b633f;
+  font-size: 11px;
   line-height: 1.9;
 }
 

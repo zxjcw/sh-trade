@@ -125,12 +125,12 @@ export const deliveryMethodLabels = {
 }
 
 export const coverGradients = [
-  'linear-gradient(135deg, #345c4a 0%, #6f9b7c 100%)',
-  'linear-gradient(135deg, #7a5c36 0%, #c8a06a 100%)',
-  'linear-gradient(135deg, #3f5e78 0%, #8aa9bf 100%)',
-  'linear-gradient(135deg, #6b4f4b 0%, #b98f86 100%)',
-  'linear-gradient(135deg, #4d5d3c 0%, #9aab7d 100%)',
-  'linear-gradient(135deg, #5b4a6b 0%, #9f8bb2 100%)'
+  'radial-gradient(120% 120% at 22% 12%, #455a49 0%, #26342a 72%)',
+  'radial-gradient(120% 120% at 20% 10%, #54493a 0%, #302a22 72%)',
+  'radial-gradient(120% 120% at 22% 12%, #3d4a4e 0%, #242c2f 72%)',
+  'radial-gradient(120% 120% at 20% 12%, #57453b 0%, #332923 72%)',
+  'radial-gradient(120% 120% at 22% 12%, #474a3b 0%, #2a2c24 72%)',
+  'radial-gradient(120% 120% at 22% 12%, #3a3f3b 0%, #232624 72%)'
 ]
 
 export function coverGradient(seed: number): string {

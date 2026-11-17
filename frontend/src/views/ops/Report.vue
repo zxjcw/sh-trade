@@ -131,8 +131,9 @@ onMounted(load)
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   padding: 18px 20px;
+  border-top: 2px solid var(--sgj-line-strong);
 }
 
 .stat-label {
@@ -141,8 +142,11 @@ onMounted(load)
 }
 
 .stat strong {
-  font-size: 26px;
+  font-family: var(--sgj-font-display);
+  font-size: 28px;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
+  line-height: 1.15;
 }
 
 .stat-hint {
@@ -193,16 +197,16 @@ onMounted(load)
 }
 
 .bar-track {
-  height: 10px;
+  height: 8px;
   overflow: hidden;
-  border-radius: 999px;
-  background: #f0ede5;
+  border-radius: 0;
+  background: var(--sgj-paper-deep);
 }
 
 .bar {
   height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #2f6b4f, #6f9b7c);
+  border-radius: 0;
+  background: var(--sgj-green);
 }
 
 .bar-value {
@@ -244,9 +248,9 @@ onMounted(load)
 
 .month-fill {
   width: 60%;
-  min-height: 3px;
-  border-radius: 6px 6px 2px 2px;
-  background: linear-gradient(180deg, #c98a2e, #e3bd7c);
+  border-radius: 0;
+  background: var(--sgj-brass);
+  opacity: 0.82;
 }
 
 .month-label {

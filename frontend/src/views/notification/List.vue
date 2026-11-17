@@ -94,9 +94,7 @@ onMounted(() => {
 }
 
 .notice:hover {
-  border-color: rgba(47, 107, 79, 0.35);
-  box-shadow: 0 8px 22px rgba(36, 49, 42, 0.06);
-  transform: translateY(-1px);
+  border-color: var(--sgj-line-strong);
 }
 
 .notice.unread {

@@ -51,5 +51,5 @@ const type = computed<TagType>(() => {
 </script>
 
 <template>
-  <el-tag :type="type" effect="light" round size="small">{{ label }}</el-tag>
+  <el-tag :type="type" effect="plain" size="small">{{ label }}</el-tag>
 </template>

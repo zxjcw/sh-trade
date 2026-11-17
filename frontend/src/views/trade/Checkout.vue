@@ -278,11 +278,11 @@ onMounted(load)
   gap: 5px;
   padding: 16px 18px;
   border: 1px solid var(--sgj-line);
-  border-radius: 12px;
-  background: #fff;
+  border-radius: 1px;
+  background: var(--sgj-surface);
   cursor: pointer;
   text-align: left;
-  transition: all 0.16s ease;
+  transition: all 0.2s ease;
 }
 
 .delivery-card:hover {
@@ -290,9 +290,9 @@ onMounted(load)
 }
 
 .delivery-card.active {
-  border-color: var(--sgj-primary);
-  background: var(--sgj-primary-soft);
-  box-shadow: 0 0 0 1px var(--sgj-primary) inset;
+  border-color: var(--sgj-green);
+  background: var(--sgj-green-soft);
+  box-shadow: 0 0 0 1px var(--sgj-green) inset;
 }
 
 .delivery-card strong {
@@ -318,9 +318,10 @@ onMounted(load)
   gap: 12px;
   margin-top: 22px;
   padding: 14px 16px;
-  border-radius: 12px;
-  background: #f8f6f0;
-  color: var(--sgj-primary);
+  border: 1px solid var(--sgj-line);
+  border-radius: 1px;
+  background: var(--sgj-paper-deep);
+  color: var(--sgj-green);
 }
 
 .escrow strong {
@@ -352,7 +353,8 @@ onMounted(load)
   height: 64px;
   flex-shrink: 0;
   overflow: hidden;
-  border-radius: 9px;
+  border: 1px solid var(--sgj-line-strong);
+  border-radius: 1px;
 }
 
 .item-info {
@@ -392,8 +394,10 @@ onMounted(load)
 }
 
 .line.total strong {
-  color: var(--sgj-accent-deep);
-  font-size: 26px;
+  color: var(--sgj-brass);
+  font-family: var(--sgj-font-display);
+  font-size: 28px;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
@@ -403,10 +407,10 @@ onMounted(load)
   justify-content: space-between;
   margin-top: 16px;
   padding: 10px 12px;
-  border-radius: 9px;
-  background: #f8f6f0;
+  border-radius: 1px;
+  background: var(--sgj-paper-deep);
   color: var(--sgj-muted);
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .balance strong {

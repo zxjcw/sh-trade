@@ -199,7 +199,8 @@ onMounted(load)
   height: 90px;
   flex-shrink: 0;
   overflow: hidden;
-  border-radius: 10px;
+  border: 1px solid var(--sgj-line-strong);
+  border-radius: 1px;
 }
 
 .bought-info {
@@ -242,11 +243,12 @@ onMounted(load)
 .dialog-tip {
   margin: 0 0 16px;
   padding: 10px 12px;
-  border-radius: 8px;
-  background: #fbf5e8;
-  color: #8a7b60;
-  font-size: 12px;
-  line-height: 1.7;
+  border: 1px solid var(--sgj-line);
+  border-radius: 1px;
+  background: var(--sgj-brass-soft);
+  color: #7b633f;
+  font-size: 11px;
+  line-height: 1.8;
 }
 
 .full {

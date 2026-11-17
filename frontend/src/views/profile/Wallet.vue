@@ -165,36 +165,58 @@ onMounted(load)
 }
 
 .balance-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  padding: 30px 32px;
-  border-radius: 20px;
+  padding: 32px;
+  overflow: hidden;
+  border: 1px solid var(--sgj-green-deep);
+  border-radius: 0;
   background:
-    radial-gradient(circle at 82% 12%, rgba(232, 217, 184, 0.22), transparent 36%),
-    linear-gradient(145deg, #1f3b2c, #2f6b4f 68%, #447e5f);
-  box-shadow: 0 20px 40px rgba(31, 59, 44, 0.16);
-  color: #f6f1e4;
+    radial-gradient(100% 120% at 84% 8%, rgba(216, 180, 119, 0.12), transparent 48%),
+    var(--sgj-green-deep);
+  color: #f4efe3;
+}
+
+.balance-card::before {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  content: '';
+  pointer-events: none;
+}
+
+.label,
+.balance,
+.formula,
+.balance-foot {
+  position: relative;
+  z-index: 1;
 }
 
 .label {
   margin: 0;
-  color: rgba(246, 241, 228, 0.62);
-  font-size: 12px;
-  letter-spacing: 2px;
+  color: rgba(244, 239, 227, 0.48);
+  font-size: 9px;
+  letter-spacing: 0.22em;
 }
 
 .balance {
-  margin: 10px 0 6px;
-  font-size: 46px;
+  margin: 12px 0 8px;
+  color: #f4efe3;
+  font-family: var(--sgj-font-display);
+  font-size: 52px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 1px;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
 }
 
 .formula {
   margin: 0;
-  color: rgba(246, 241, 228, 0.55);
-  font-size: 11px;
+  color: rgba(244, 239, 227, 0.42);
+  font-size: 10px;
+  letter-spacing: 0.03em;
 }
 
 .balance-foot {
@@ -203,13 +225,14 @@ onMounted(load)
   justify-content: space-between;
   gap: 10px;
   margin-top: auto;
-  padding-top: 26px;
-  color: rgba(246, 241, 228, 0.6);
-  font-size: 11px;
+  padding-top: 28px;
+  color: rgba(244, 239, 227, 0.42);
+  font-size: 10px;
+  letter-spacing: 0.04em;
 }
 
 .balance-foot a {
-  color: #e8d9b8;
+  color: #d8b477;
 }
 
 .recharge-card {
@@ -237,23 +260,35 @@ onMounted(load)
 .quick-btn {
   padding: 7px 14px;
   border: 1px solid var(--sgj-line);
-  border-radius: 9px;
-  background: #fff;
-  color: var(--sgj-ink);
+  border-radius: 1px;
+  background: transparent;
+  color: var(--sgj-ink-soft);
   cursor: pointer;
-  font-size: 13px;
-  transition: all 0.15s ease;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  transition: all 0.2s ease;
 }
 
 .quick-btn:hover,
 .quick-btn.active {
-  border-color: var(--sgj-primary);
-  background: var(--sgj-primary-soft);
-  color: var(--sgj-primary);
+  border-color: var(--sgj-green);
+  background: var(--sgj-paper-deep);
+  color: var(--sgj-green);
 }
 
 .amount-input {
   width: 100%;
+}
+
+.recharge-card :deep(.el-input-group__append) {
+  border-color: var(--sgj-green);
+  background: var(--sgj-green);
+  box-shadow: 0 0 0 1px var(--sgj-green) inset;
+}
+
+.recharge-card :deep(.el-input-group__append .el-button) {
+  color: #f7f3e9;
+  letter-spacing: 0.08em;
 }
 
 .note {

@@ -178,7 +178,7 @@ onMounted(async () => {
         >
           <el-icon><Plus /></el-icon>
         </el-upload>
-        <p class="upload-hint">演示环境不会真正上传文件，提交后会用渐变色占位封面展示。</p>
+        <p class="upload-hint">演示环境不会真正上传文件，提交后会用图录版式占位封面展示。</p>
       </section>
 
       <div class="submit-bar">

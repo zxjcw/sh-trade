@@ -31,17 +31,19 @@ const expired = computed(() => remaining.value <= 0)
 .countdown {
   display: inline-flex;
   align-items: center;
-  padding: 1px 8px;
-  border-radius: 6px;
-  background: #fdf3e3;
-  color: var(--sgj-accent-deep);
-  font-size: 12px;
+  padding: 1px 7px;
+  border: 1px solid var(--sgj-line);
+  border-radius: 1px;
+  background: var(--sgj-brass-soft);
+  color: var(--sgj-brass);
+  font-size: 11px;
   font-variant-numeric: tabular-nums;
   font-weight: 600;
 }
 
 .countdown.expired {
-  background: #f4f4f4;
-  color: #9a9a9a;
+  border-color: var(--sgj-line);
+  background: var(--sgj-paper-deep);
+  color: var(--sgj-faint);
 }
 </style>

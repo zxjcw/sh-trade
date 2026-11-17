@@ -213,10 +213,11 @@ onMounted(load)
 
 .rules {
   padding: 14px 18px;
-  border-radius: 12px;
-  background: #f8f6f0;
+  border: 1px solid var(--sgj-line);
+  border-radius: 1px;
+  background: var(--sgj-paper-deep);
   color: var(--sgj-muted);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.9;
 }
 

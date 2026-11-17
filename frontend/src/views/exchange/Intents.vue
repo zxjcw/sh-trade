@@ -352,15 +352,16 @@ onMounted(async () => {
   gap: 5px;
   padding: 18px 20px;
   border: 1px solid var(--sgj-line);
-  border-radius: 16px;
+  border-radius: 1px;
   background: var(--sgj-surface);
 }
 
 .num {
-  color: var(--sgj-accent);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
+  color: var(--sgj-brass);
+  font-family: var(--sgj-font-display);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
 .step strong {
@@ -405,7 +406,10 @@ onMounted(async () => {
 }
 
 .plan-title strong {
-  font-size: 16px;
+  font-family: var(--sgj-font-display);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
 .plan-id {
@@ -427,8 +431,9 @@ onMounted(async () => {
   align-items: center;
   gap: 10px;
   padding: 16px;
-  border-radius: 12px;
-  background: #f8f6f0;
+  border: 1px solid var(--sgj-line);
+  border-radius: 1px;
+  background: var(--sgj-paper-deep);
 }
 
 .participant {
@@ -436,8 +441,9 @@ onMounted(async () => {
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
-  border-radius: 10px;
-  background: #fff;
+  border: 1px solid var(--sgj-line);
+  border-radius: 1px;
+  background: var(--sgj-surface);
 }
 
 .mini-cover {
@@ -445,7 +451,8 @@ onMounted(async () => {
   height: 40px;
   flex-shrink: 0;
   overflow: hidden;
-  border-radius: 7px;
+  border: 1px solid var(--sgj-line-strong);
+  border-radius: 1px;
 }
 
 .participant-info,
@@ -524,10 +531,11 @@ onMounted(async () => {
   width: 52px;
   height: 40px;
   place-items: center;
-  border: 1px dashed var(--sgj-line);
-  border-radius: 7px;
+  border: 1px dashed var(--sgj-line-strong);
+  border-radius: 1px;
   color: var(--sgj-muted);
-  font-size: 11px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
 }
 
 .intent-foot {
@@ -545,11 +553,12 @@ onMounted(async () => {
 .dialog-tip {
   margin: 4px 0 0;
   padding: 10px 12px;
-  border-radius: 8px;
-  background: #fbf5e8;
-  color: #8a7b60;
-  font-size: 12px;
-  line-height: 1.7;
+  border: 1px solid var(--sgj-line);
+  border-radius: 1px;
+  background: var(--sgj-brass-soft);
+  color: #7b633f;
+  font-size: 11px;
+  line-height: 1.8;
 }
 
 .full {

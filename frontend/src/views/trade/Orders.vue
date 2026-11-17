@@ -354,11 +354,12 @@ onMounted(load)
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  padding: 12px 18px;
+  padding: 11px 18px;
   border-bottom: 1px solid var(--sgj-line);
-  background: #faf8f3;
+  background: var(--sgj-paper-deep);
   color: var(--sgj-muted);
-  font-size: 12px;
+  font-size: 10px;
+  letter-spacing: 0.06em;
 }
 
 .order-no {
@@ -384,11 +385,12 @@ onMounted(load)
 }
 
 .thumb {
-  width: 110px;
-  height: 82px;
+  width: 112px;
+  height: 84px;
   flex-shrink: 0;
   overflow: hidden;
-  border-radius: 10px;
+  border: 1px solid var(--sgj-line-strong);
+  border-radius: 1px;
 }
 
 .order-info {
@@ -415,7 +417,8 @@ onMounted(load)
   gap: 5px;
   margin: 0;
   color: var(--sgj-muted);
-  font-size: 12px;
+  font-size: 11px;
+  letter-spacing: 0.02em;
 }
 
 .meta strong {
@@ -428,7 +431,7 @@ onMounted(load)
   gap: 6px;
   margin: 0;
   color: var(--sgj-muted);
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .order-actions {

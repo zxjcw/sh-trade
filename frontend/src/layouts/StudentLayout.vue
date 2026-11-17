@@ -71,13 +71,15 @@ watch(
 
 <template>
   <div class="shell">
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
     <header class="topbar">
       <div class="topbar-inner">
         <router-link class="brand" to="/">
           <span class="brand-mark">拾</span>
           <span class="brand-text">
             <strong>拾光集</strong>
-            <small>校园二手交易平台</small>
+            <small>CAMPUS EXCHANGE</small>
           </span>
         </router-link>
 
@@ -94,12 +96,7 @@ watch(
         </nav>
 
         <form class="search" @submit.prevent="search">
-          <el-input
-            v-model="keyword"
-            placeholder="搜索教材、数码、宿舍好物…"
-            clearable
-            size="default"
-          >
+          <el-input v-model="keyword" placeholder="搜索教材、数码、宿舍好物" clearable>
             <template #prefix>
               <el-icon><Search /></el-icon>
             </template>
@@ -107,14 +104,14 @@ watch(
         </form>
 
         <div class="actions">
-          <el-button class="publish-btn" type="primary" round @click="goPublish">
+          <el-button class="publish-btn" type="primary" @click="goPublish">
             <el-icon><Plus /></el-icon>
             发布物品
           </el-button>
 
           <router-link v-if="auth.isLoggedIn" to="/notifications" class="icon-btn" aria-label="消息">
             <el-badge :value="notifications.unreadCount" :hidden="notifications.unreadCount === 0">
-              <el-icon :size="20"><Bell /></el-icon>
+              <el-icon :size="19"><Bell /></el-icon>
             </el-badge>
           </router-link>
 
@@ -123,7 +120,7 @@ watch(
               <button class="user-chip" type="button">
                 <span class="avatar">{{ avatarText }}</span>
                 <span class="user-name">{{ auth.displayName }}</span>
-                <el-icon><ArrowDown /></el-icon>
+                <el-icon class="chevron"><ArrowDown /></el-icon>
               </button>
               <template #dropdown>
                 <el-dropdown-menu>
@@ -148,15 +145,18 @@ watch(
       </div>
     </header>
 
-    <main class="main">
+    <main id="main" class="main">
       <router-view />
     </main>
 
     <footer class="footer">
       <div class="footer-inner">
-        <span>拾光集 · 校园二手交易平台</span>
-        <span class="footer-dot">·</span>
-        <span>物品有履历，交易有托管，信用有记录</span>
+        <div class="footer-brand">
+          <span class="footer-mark">拾</span>
+          <span>拾光集 · 校园二手交易平台</span>
+        </div>
+        <span class="footer-meta">物品履历 / 资金托管 / 信用记录</span>
+        <span class="footer-copy">© 2026</span>
       </div>
     </footer>
   </div>
@@ -165,7 +165,7 @@ watch(
 <style scoped>
 .shell {
   display: flex;
-  min-height: 100vh;
+  min-height: 100dvh;
   flex-direction: column;
 }
 
@@ -173,38 +173,39 @@ watch(
   position: sticky;
   top: 0;
   z-index: 30;
-  border-bottom: 1px solid rgba(230, 225, 214, 0.9);
-  background: rgba(255, 254, 250, 0.9);
-  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--sgj-line);
+  background: rgba(241, 237, 228, 0.9);
+  backdrop-filter: blur(16px);
 }
 
 .topbar-inner {
   display: flex;
-  width: min(1240px, calc(100% - 40px));
+  width: min(1240px, calc(100% - 64px));
   margin: 0 auto;
   align-items: center;
-  gap: 22px;
-  padding: 12px 0;
+  gap: 28px;
+  padding: 14px 0;
 }
 
 .brand {
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
 }
 
 .brand-mark {
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   place-items: center;
-  border-radius: 12px;
-  background: linear-gradient(145deg, #2f6b4f, #1f4a37);
-  box-shadow: 0 6px 16px rgba(47, 107, 79, 0.25);
+  border: 1px solid var(--sgj-green-deep);
+  border-radius: 1px;
+  background: var(--sgj-green);
   color: #f6f1e4;
-  font-size: 20px;
-  font-weight: 700;
+  font-family: var(--sgj-font-display);
+  font-size: 19px;
+  font-weight: 600;
 }
 
 .brand-text {
@@ -214,119 +215,155 @@ watch(
 }
 
 .brand-text strong {
-  font-size: 17px;
-  letter-spacing: 3px;
+  font-family: var(--sgj-font-display);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
 }
 
 .brand-text small {
-  color: var(--sgj-muted);
-  font-size: 10px;
-  letter-spacing: 1px;
+  margin-top: 3px;
+  color: var(--sgj-faint);
+  font-size: 8px;
+  letter-spacing: 0.22em;
 }
 
 .nav {
   display: flex;
-  gap: 4px;
+  gap: 22px;
 }
 
 .nav-link {
   position: relative;
-  padding: 7px 12px;
-  border-radius: 8px;
-  color: #5c675f;
-  font-size: 14px;
-  transition: all 0.18s ease;
+  padding: 8px 0;
+  color: var(--sgj-muted);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  transition: color 0.2s ease;
 }
 
-.nav-link:hover {
-  background: var(--sgj-primary-soft);
-  color: var(--sgj-primary);
-}
-
+.nav-link:hover,
 .nav-link.active {
-  color: var(--sgj-primary);
-  font-weight: 600;
+  color: var(--sgj-ink);
 }
 
 .nav-link.active::after {
   position: absolute;
-  right: 12px;
-  bottom: 1px;
-  left: 12px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--sgj-primary);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: var(--sgj-brass);
   content: '';
 }
 
 .search {
   flex: 1;
-  max-width: 360px;
+  max-width: 300px;
   margin-left: auto;
+}
+
+.search :deep(.el-input__wrapper) {
+  padding: 2px 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  border-bottom: 1px solid var(--sgj-line-strong);
+}
+
+.search :deep(.el-input__wrapper.is-focus) {
+  border-bottom-color: var(--sgj-ink);
+  box-shadow: none;
+}
+
+.search :deep(.el-input__inner) {
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+
+.search :deep(.el-input__prefix) {
+  color: var(--sgj-faint);
 }
 
 .actions {
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .publish-btn {
-  padding-inline: 16px;
+  padding-inline: 15px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
 }
 
 .icon-btn {
   display: grid;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   place-items: center;
-  border-radius: 10px;
-  color: #5c675f;
-  transition: background 0.18s ease;
+  color: var(--sgj-muted);
+  transition: color 0.2s ease;
 }
 
 .icon-btn:hover {
-  background: var(--sgj-primary-soft);
-  color: var(--sgj-primary);
+  color: var(--sgj-ink);
 }
 
 .user-chip {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 8px 4px 4px;
-  border: 1px solid var(--sgj-line);
-  border-radius: 999px;
-  background: #fff;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--sgj-ink);
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
 }
 
 .avatar {
   display: grid;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   place-items: center;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #d9a860, #b57a25);
-  color: #fff;
-  font-size: 13px;
+  border-radius: 1px;
+  background: var(--sgj-brass);
+  color: #fbf8f1;
+  font-family: var(--sgj-font-display);
+  font-size: 14px;
   font-weight: 600;
 }
 
+.chevron {
+  color: var(--sgj-faint);
+  font-size: 11px;
+}
+
 .login-link {
-  color: var(--sgj-ink);
-  font-size: 14px;
+  color: var(--sgj-ink-soft);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.login-link:hover {
+  color: var(--sgj-green);
 }
 
 .register-link {
   padding: 7px 16px;
-  border-radius: 999px;
-  background: var(--sgj-primary);
-  color: #fff;
-  font-size: 14px;
+  border: 1px solid var(--sgj-green);
+  background: var(--sgj-green);
+  color: #f7f3e9;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  transition: background-color 0.2s ease;
+}
+
+.register-link:hover {
+  background: var(--sgj-green-deep);
 }
 
 .main {
@@ -335,22 +372,45 @@ watch(
 
 .footer {
   border-top: 1px solid var(--sgj-line);
-  background: rgba(255, 254, 250, 0.7);
 }
 
 .footer-inner {
   display: flex;
   flex-wrap: wrap;
-  width: min(1180px, calc(100% - 48px));
+  width: min(1240px, calc(100% - 64px));
   margin: 0 auto;
-  gap: 8px;
-  padding: 22px 0;
-  color: var(--sgj-muted);
-  font-size: 12px;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 0 28px;
+  color: var(--sgj-faint);
+  font-size: 10px;
+  letter-spacing: 0.1em;
 }
 
-.footer-dot {
-  color: #c9cec9;
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--sgj-muted);
+}
+
+.footer-mark {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border: 1px solid var(--sgj-line-strong);
+  color: var(--sgj-ink-soft);
+  font-family: var(--sgj-font-display);
+  font-size: 11px;
+}
+
+.footer-meta {
+  margin-left: auto;
+}
+
+.footer-copy {
+  font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 1080px) {
@@ -365,9 +425,10 @@ watch(
 
 @media (max-width: 760px) {
   .topbar-inner {
-    width: calc(100% - 24px);
+    width: calc(100% - 32px);
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 10px 14px;
+    padding: 12px 0;
   }
 
   .brand-text small {
@@ -377,6 +438,7 @@ watch(
   .search {
     order: 3;
     flex-basis: 100%;
+    max-width: none;
   }
 
   .publish-btn {
@@ -387,8 +449,21 @@ watch(
     display: none;
   }
 
+  .actions {
+    gap: 10px;
+    margin-left: auto;
+  }
+
   .footer-inner {
     width: calc(100% - 32px);
+  }
+
+  .footer-meta {
+    display: none;
+  }
+
+  .footer-copy {
+    margin-left: auto;
   }
 }
 </style>

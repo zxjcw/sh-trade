@@ -122,9 +122,8 @@ async function submit() {
   width: min(520px, 100%);
   padding: 36px 38px 30px;
   border: 1px solid var(--sgj-line);
-  border-radius: 22px;
+  border-radius: 2px;
   background: var(--sgj-surface);
-  box-shadow: var(--sgj-shadow);
 }
 
 .back {
@@ -144,19 +143,23 @@ async function submit() {
   display: grid;
   width: 46px;
   height: 46px;
-  margin: 0 auto 12px;
+  margin: 0 auto 14px;
   place-items: center;
-  border-radius: 14px;
-  background: linear-gradient(145deg, #2f6b4f, #1f4a37);
+  border: 1px solid var(--sgj-green-deep);
+  border-radius: 1px;
+  background: var(--sgj-green);
   color: #f4efe3;
+  font-family: var(--sgj-font-display);
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .head h1 {
   margin: 0;
-  font-size: 26px;
-  letter-spacing: 2px;
+  font-family: var(--sgj-font-display);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
 .head p {

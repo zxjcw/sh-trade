@@ -57,7 +57,7 @@ onMounted(load)
         <h2>让物品来找你</h2>
         <p>悬赏按分类、关键词和预算匹配，价格容差默认 ±20%。同一买家最多同时保留 3 条悬赏。</p>
       </div>
-      <el-button class="banner-btn" round size="large" @click="goPublish()">发布一条悬赏</el-button>
+      <el-button type="primary" size="large" @click="goPublish()">发布一条悬赏</el-button>
     </section>
 
     <div v-loading="loading" class="bounty-grid">
@@ -100,43 +100,38 @@ onMounted(load)
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  padding: 28px 32px;
-  margin-bottom: 24px;
-  border-radius: 20px;
-  background:
-    radial-gradient(circle at 88% 18%, rgba(232, 217, 184, 0.2), transparent 36%),
-    linear-gradient(125deg, #4a3520, #8a6428);
-  color: #f6f1e4;
+  gap: 24px;
+  padding: 30px 32px;
+  margin-bottom: 26px;
+  border: 1px solid var(--sgj-line);
+  border-left: 2px solid var(--sgj-brass);
+  border-radius: 0;
+  background: var(--sgj-paper-deep);
+  color: var(--sgj-ink);
 }
 
 .banner-kicker {
-  color: rgba(246, 241, 228, 0.6);
-  font-size: 11px;
-  letter-spacing: 2px;
+  color: var(--sgj-brass);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
 }
 
 .banner h2 {
-  margin: 6px 0 8px;
-  font-size: 26px;
-  letter-spacing: 1px;
+  margin: 8px 0 10px;
+  color: var(--sgj-ink);
+  font-family: var(--sgj-font-display);
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
 .banner p {
   max-width: 620px;
   margin: 0;
-  color: rgba(246, 241, 228, 0.68);
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.banner-btn {
-  --el-button-bg-color: #f0e3c8;
-  --el-button-border-color: #f0e3c8;
-  --el-button-text-color: #4a3520;
-  --el-button-hover-bg-color: #fff4dd;
-  --el-button-hover-border-color: #fff4dd;
-  --el-button-hover-text-color: #3b2a18;
+  color: var(--sgj-muted);
+  font-size: 12px;
+  line-height: 1.85;
 }
 
 .bounty-grid {
@@ -151,13 +146,11 @@ onMounted(load)
   flex-direction: column;
   gap: 12px;
   padding: 20px 22px;
-  transition: all 0.16s ease;
+  transition: border-color 0.2s ease;
 }
 
 .bounty-card:hover {
-  border-color: rgba(201, 138, 46, 0.4);
-  box-shadow: 0 10px 26px rgba(36, 49, 42, 0.07);
-  transform: translateY(-2px);
+  border-color: var(--sgj-line-strong);
 }
 
 .card-head {
