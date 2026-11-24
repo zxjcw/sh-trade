@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
-@MapperScan("com.shiguangji.modules")
+@MapperScan({"com.shiguangji.common.mapper", "com.shiguangji.modules"})
 @SpringBootApplication
 public class ShiguangjiApplication {
 

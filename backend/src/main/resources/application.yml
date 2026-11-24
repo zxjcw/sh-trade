@@ -29,6 +29,13 @@ mybatis-plus:
 
 app:
   upload-dir: ./uploads
+  jwt:
+    secret: ${APP_JWT_SECRET:shiguangji-local-dev-secret-key-0123456789}
+    expiration: 7d
+  limits:
+    recharge-max: 5000
+    max-open-bounties: 3
+    bounty-tolerance: 20
   timeout:
     order-pay: 30s
     auto-confirm: 10m

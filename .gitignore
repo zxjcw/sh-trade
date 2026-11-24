@@ -24,3 +24,6 @@ uploads/
 # OS
 .DS_Store
 Thumbs.db
+
+# 本地数据库备份
+backend/backup/

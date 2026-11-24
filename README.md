@@ -25,18 +25,18 @@
 | 编号 | 业务 | 后端模块 |
 |---|---|---|
 | F1 | 注册与登录 | `modules/auth` |
-| F2 | 学籍认证 | `modules/verification` |
+| F2 | 学籍认证 | `modules/user`（VerificationService） |
 | F3 | 物品发布与履历建档 | `modules/item` |
 | F4 | 浏览、搜索与筛选 | `modules/item` |
 | F5 | 下单与担保支付 | `modules/trade` |
 | F6 | 履约交付与交易完成 | `modules/trade` |
 | F7 | 评价 | `modules/trade` |
-| F8 | 退款与纠纷仲裁 | `modules/aftersale` |
+| F8 | 退款与纠纷仲裁 | `modules/trade`（售后）+ `modules/ops`（仲裁） |
 | F9 | 求购与悬赏 | `modules/bounty` |
 | F10 | 物品接力（再次上架） | `modules/item` |
 | F11 | 三方置换 | `modules/exchange` |
-| F12 | 内容审核与仲裁处理 | `modules/moderation` |
-| F13 | 运营报表 | `modules/report` |
+| F12 | 内容审核与仲裁处理 | `modules/ops` |
+| F13 | 运营报表 | `modules/ops`（report） |
 | F14 | 校方管理 | `modules/admin` |
 
 支撑模块：`user`（用户 / 信用 / 钱包）、`catalog`（学籍 / 分类 / 自提点）、`payment`（托管 / 流水 / 平台账户）、`notification`（通知）、`scheduler`（超时任务）。
@@ -87,7 +87,7 @@
 docker compose up -d mysql
 ```
 
-默认库 `shiguangji`，账号 `root / root`，端口 3306。没有 Docker 时手动建库：
+默认库 `shiguangji`，账号 `root / root`，端口 3306。没有 Docker 时手动建库（只建空库，表和数据由 Flyway 建）：
 
 ```sql
 CREATE DATABASE shiguangji
@@ -99,13 +99,21 @@ CREATE DATABASE shiguangji
 
 ```bash
 cd backend
+# 本机 MySQL 的 root 密码通过环境变量传入，不要写进仓库
+DB_PASSWORD=<你的密码> mvn spring-boot:run
+```
+
+Windows PowerShell：
+
+```powershell
+$env:DB_PASSWORD = '<你的密码>'
 mvn spring-boot:run
 ```
 
 - 服务地址：http://localhost:8080
 - Swagger UI：http://localhost:8080/swagger-ui.html
 
-首次启动时 Flyway 会自动执行 `src/main/resources/db/migration` 下的脚本（当前为空，建表脚本随后补充）。
+Flyway 启动时按顺序执行：`db/migration/V1__schema.sql`（21 张表）、`V2__seed.sql`（平台账户 / 分类 / 自提点）、`db/demo/V3__demo_seed.sql`（仅 dev 环境加载的演示数据）。演示账号的密码占位 `{demo}` 会由 dev 环境下的 `DemoDataInitializer` 用 BCrypt 回填为 `123456`。
 
 ### 3. 启动前端
 
@@ -115,7 +123,14 @@ npm install
 npm run dev
 ```
 
-打开 http://localhost:5173，开发服务器已把 `/api` 代理到 8080。当前默认启用 mock：`frontend/.env.development` 中 `VITE_USE_MOCK=true`，不需要后端也能完整浏览和操作；接真实接口时改为 `false`。
+打开 http://localhost:5173，开发服务器已把 `/api` 代理到 8080。前端默认启用 mock（`frontend/.env.development` 中 `VITE_USE_MOCK=true`），不启动后端也能完整浏览。要接真实后端，**不用改任何前端文件**，用环境变量覆盖即可：
+
+```bash
+# PowerShell
+$env:VITE_USE_MOCK = 'false'; npm run dev
+# bash
+VITE_USE_MOCK=false npm run dev
+```
 
 ### 4. 数据库变更
 
@@ -140,16 +155,21 @@ npm run dev
 - 运营端：物品审核（通过 / 驳回）、仲裁处理、运营报表
 - 管理端：学籍导入与查询、分类管理、自提点管理、运营账号创建
 
-mock 是演示与联调前的占位实现，金额、定时任务和风控规则最终以后端为准。
+mock 是演示与联调前的占位实现，金额、定时任务和风控规则最终以后端为准。后端 `db/demo/V3__demo_seed.sql` 灌入的是同一套账号与相近的演示数据（7 个账号，密码同为 `123456`），前端用 `VITE_USE_MOCK=false` 启动后可以直接用上表的账号登录。
 
 ## 配置
 
 | 位置 | 说明 |
 |---|---|
-| `backend/src/main/resources/application.yml` | 公共配置：端口、Jackson、上传大小、业务时限 |
-| `backend/src/main/resources/application-dev.yml` | 开发环境数据源，支持 `DB_HOST` / `DB_PORT` / `DB_NAME` / `DB_USERNAME` / `DB_PASSWORD` 覆盖 |
-| `app.timeout.*` | 所有业务时限集中配置，测试时可改为秒级 |
-| `frontend/.env.development` | `VITE_API_BASE_URL`，默认 `/api` |
+| `backend/src/main/resources/application.yml` | 公共配置：端口、Jackson、上传大小、业务时限、JWT、业务限额 |
+| `backend/src/main/resources/application-dev.yml` | 开发环境数据源，支持 `DB_HOST` / `DB_PORT` / `DB_NAME` / `DB_USERNAME` / `DB_PASSWORD` 覆盖；Flyway 额外加载 `classpath:db/demo` |
+| `backend/src/main/resources/db/migration` | `V1__schema.sql` 建表、`V2__seed.sql` 基础数据（分类 / 自提点 / 平台账户） |
+| `backend/src/main/resources/db/demo` | 仅 dev 的演示数据 `V3__demo_seed.sql`（账号、物品、订单、悬赏、置换、仲裁） |
+| `app.timeout.*` | 所有业务时限集中配置（未支付 30 秒、自动确认 10 分钟、评价窗口 10 分钟、售后 5 分钟、卖家响应 2 分钟、置换确认 10 分钟），测试时可改为秒级 |
+| `app.jwt.*` | `secret`（可用 `APP_JWT_SECRET` 覆盖）与 `expiration`（默认 7 天） |
+| `app.limits.*` | 单次充值上限、同时进行中的求购数、求购价格容差 |
+| `app.upload-dir` | 上传文件目录，默认 `./uploads`，通过 `/uploads/**` 静态映射访问 |
+| `frontend/.env.development` | `VITE_API_BASE_URL`，默认 `/api`；`VITE_USE_MOCK` 可用环境变量覆盖 |
 
 数据库密码、API Key 等敏感信息不写进仓库。
 
@@ -200,8 +220,8 @@ mock 是演示与联调前的占位实现，金额、定时任务和风控规则
 - [x] Flyway 21 张表与种子数据（MySQL 8.4.11 实测通过）
 - [x] 部署文档、Docker Compose / Nginx / 备份脚本骨架
 - [ ] 服务器上线（公网 IP + HTTP；域名/HTTPS 后续）
-- [ ] 统一响应、异常处理、JWT 鉴权
-- [ ] F1–F8 核心闭环
-- [ ] F9–F14
-- [ ] 定时任务联调
-- [ ] 前端切换真实接口（`VITE_USE_MOCK=false`）
+- [x] 统一响应、异常处理、JWT 鉴权
+- [x] F1–F8 核心闭环
+- [x] F9–F14
+- [x] 定时任务联调
+- [x] 前端切换真实接口（`VITE_USE_MOCK=false` 只需启动参数，无需改代码）
