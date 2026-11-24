@@ -1,0 +1,92 @@
+name: shiguangji
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: sgj-mysql
+    restart: unless-stopped
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+      - --default-time-zone=+08:00
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-shiguangji}
+      MYSQL_USER: ${MYSQL_USER:-shiguangji}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: Asia/Shanghai
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    networks:
+      - backend-net
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: sgj-backend
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-shiguangji}
+      DB_USERNAME: ${MYSQL_USER:-shiguangji}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      UPLOAD_DIR: /data/uploads
+      JWT_SECRET: ${JWT_SECRET}
+      APP_BOOTSTRAP_ENABLED: ${APP_BOOTSTRAP_ENABLED:-true}
+      APP_ADMIN_USERNAME: ${APP_ADMIN_USERNAME:-admin}
+      APP_ADMIN_PASSWORD: ${APP_ADMIN_PASSWORD}
+      TZ: Asia/Shanghai
+    volumes:
+      - ${DATA_DIR:-/data/shiguangji}/uploads:/data/uploads
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - backend-net
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: sgj-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ${DATA_DIR:-/data/shiguangji}/uploads:/data/uploads:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - backend-net
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  mysql-data:
+
+networks:
+  backend-net:
+    driver: bridge

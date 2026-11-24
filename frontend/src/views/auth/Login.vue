@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { Lock, User } from '@element-plus/icons-vue'
 import type { FormInstance, FormRules } from 'element-plus'
+import { isMockMode } from '@/api/client'
 import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
@@ -133,7 +134,7 @@ async function submit() {
           </el-button>
         </el-form>
 
-        <div class="demo">
+        <div v-if="isMockMode" class="demo">
           <p class="demo-title">演示账号 / 密码均为 123456</p>
           <div class="demo-grid">
             <button
