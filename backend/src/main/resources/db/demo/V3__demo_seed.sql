@@ -73,7 +73,7 @@ INSERT INTO trade_order (order_no, order_type, buyer_id, seller_id, item_id, amo
    NOW() - INTERVAL 3 DAY + INTERVAL 30 SECOND, NULL,
    NOW() - INTERVAL 3 DAY, NOW() - INTERVAL 3 DAY + INTERVAL 9 MINUTE),
   ('SO20251121002', 'normal', 3, 2, 6, 22.00, 'pickup', 1, 'pending_confirm', 'none',
-   NOW() - INTERVAL 1 HOUR, NOW() + INTERVAL 9 MINUTE,
+   NOW() - INTERVAL 1 HOUR, NOW() + INTERVAL 3 DAY,
    NOW() - INTERVAL 59 MINUTE, NULL);
 
 INSERT INTO item_history (item_id, event_type, event_time, description, related_user_id, order_no) VALUES
